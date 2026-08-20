@@ -1,0 +1,188 @@
+/* Petal Instrument Panel: pearl-and-pastel glass lenses, tactile shadows, editorial contrast, and zero neon. */
+/* Low motion removes non-essential motion without changing the tactile hierarchy or control responsiveness. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --primary: #557eb3;
+  --primary-foreground: #f7faff;
+  --radius: 0.75rem;
+  --background: #f4f1f4;
+  --foreground: #27313f;
+  --card: #ffffff;
+  --card-foreground: #27313f;
+  --popover: #ffffff;
+  --popover-foreground: #27313f;
+  --secondary: #ece9f1;
+  --secondary-foreground: #4e5969;
+  --muted: #eceaf0;
+  --muted-foreground: #6f7786;
+  --accent: #e8eff8;
+  --accent-foreground: #27313f;
+  --destructive: #d96060;
+  --destructive-foreground: #fff;
+  --border: #dfe1e8;
+  --input: #dfe1e8;
+  --ring: #7da7d8;
+}
+
+.dark {
+  --primary: #a5c4ed;
+  --primary-foreground: #141925;
+  --background: #191d2a;
+  --foreground: #eef2f7;
+  --card: #232837;
+  --card-foreground: #eef2f7;
+  --popover: #232837;
+  --popover-foreground: #eef2f7;
+  --secondary: #2c3142;
+  --secondary-foreground: #d6dce7;
+  --muted: #303647;
+  --muted-foreground: #aeb7c8;
+  --accent: #303647;
+  --accent-foreground: #f3f6fb;
+  --destructive: #f08f8a;
+  --destructive-foreground: #1b1d29;
+  --border: #3a4154;
+  --input: #3a4154;
+  --ring: #a5c4ed;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; font-family: "Manrope", sans-serif; }
+  button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [type="button"]:not(:disabled), [type="submit"]:not(:disabled), [type="reset"]:not(:disabled), a[href], select:not(:disabled), input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled) { @apply cursor-pointer; }
+}
+
+@layer components {
+  .atlas-shell {
+    min-height: 100vh;
+    background: radial-gradient(circle at 8% 7%, color-mix(in srgb, var(--brand) 18%, transparent), transparent 28rem), radial-gradient(circle at 93% 11%, rgba(232, 177, 204, 0.24), transparent 27rem), var(--background);
+    transition: background 240ms var(--ease-out), color 200ms var(--ease-out);
+  }
+  .atlas-shell::before { background-image: linear-gradient(rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 38px 38px; content: ""; inset: 0; opacity: 0.42; pointer-events: none; position: fixed; z-index: 0; }
+  .dark .atlas-shell::before { opacity: 0.09; }
+  .display-face { font-family: "DM Serif Display", Georgia, serif; }
+  .glass-card { background: color-mix(in srgb, var(--card) 76%, transparent); border: 1px solid color-mix(in srgb, #fff 64%, var(--brand)); box-shadow: 15px 16px 32px rgba(68, 70, 100, 0.10), inset 1px 1px 0 rgba(255,255,255,0.82), inset -1px -1px 0 rgba(111, 117, 145, 0.06); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .dark .glass-card { background: rgba(35, 40, 55, 0.78); border-color: rgba(219,229,244,0.16); box-shadow: 16px 18px 34px rgba(0, 0, 0, 0.24), inset 1px 1px 0 rgba(255,255,255,0.08), inset -1px -1px 0 rgba(0,0,0,0.14); }
+  .inset-well { background: color-mix(in srgb, var(--background) 84%, var(--brand)); box-shadow: inset 5px 5px 11px rgba(80, 90, 111, 0.12), inset -5px -5px 10px rgba(255,255,255,0.82); }
+  .dark .inset-well { box-shadow: inset 5px 5px 12px rgba(0,0,0,0.24), inset -3px -3px 8px rgba(255,255,255,0.04); }
+  .brand-seal { background: radial-gradient(circle at 34% 24%, #fff 0 14%, color-mix(in srgb, var(--brand) 24%, #fff) 36%, rgba(255,255,255,.68) 74%); box-shadow: 0 7px 16px color-mix(in srgb, var(--brand) 27%, transparent), inset 2px 2px 0 rgba(255,255,255,.98), inset -2px -2px 5px rgba(57,73,105,.16); position: relative; }
+  .brand-seal::after { border: 1px solid color-mix(in srgb, var(--brand) 55%, white); border-radius: inherit; box-shadow: inset 0 0 0 2px rgba(255,255,255,.45); content: ""; inset: 3px; pointer-events: none; position: absolute; }
+  .star-lock-brand { align-items: center; color: color-mix(in srgb, var(--brand) 82%, #253242); display: flex; height: 100%; justify-content: center; position: relative; transition: transform 160ms var(--ease-out); width: 100%; }
+  .star-lock-brand::before { background: conic-gradient(from 0deg, color-mix(in srgb, var(--brand) 95%, white), transparent 9% 16%, color-mix(in srgb, var(--brand) 76%, white) 22% 29%, transparent 35% 42%, color-mix(in srgb, var(--brand) 86%, white) 49% 56%, transparent 63% 70%, color-mix(in srgb, var(--brand) 74%, white) 78% 85%, transparent 92%); clip-path: polygon(50% 0, 59% 33%, 86% 14%, 68% 42%, 100% 50%, 68% 58%, 86% 86%, 59% 67%, 50% 100%, 41% 67%, 14% 86%, 32% 58%, 0 50%, 32% 42%, 14% 14%, 41% 33%); content: ""; filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--brand) 40%, transparent)); height: 88%; position: absolute; width: 88%; }
+  .star-lock-brand__core { align-items: center; background: color-mix(in srgb, white 72%, var(--brand)); border: 1px solid color-mix(in srgb, var(--brand) 62%, white); border-radius: 50%; box-shadow: inset 1px 1px 0 rgba(255,255,255,.96), 0 3px 8px color-mix(in srgb, var(--brand) 28%, transparent); display: flex; height: 46%; justify-content: center; position: relative; width: 46%; }
+  .dark .star-lock-brand { color: color-mix(in srgb, var(--brand) 50%, white); }
+  .dark .star-lock-brand__core { background: color-mix(in srgb, var(--brand) 24%, #1a2230); border-color: color-mix(in srgb, var(--brand) 62%, white); }
+  .motion-switch [data-slot="switch"] { background: color-mix(in srgb, var(--brand-soft) 78%, white); }
+  .dark .motion-switch [data-slot="switch"] { background: rgba(255,255,255,.16); }
+  .petal-grid { isolation: isolate; overflow: hidden; position: relative; }
+  .petal-grid::before { background-image: radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--brand) 24%, transparent) 0 2px, transparent 3px), radial-gradient(circle at 100% 0%, transparent 0 18px, color-mix(in srgb, var(--brand) 10%, transparent) 19px 20px, transparent 21px), linear-gradient(135deg, transparent 47%, color-mix(in srgb, var(--brand) 13%, transparent) 48% 49%, transparent 50%); background-position: right 22px top 20px, right 6px top 4px, right 0 top 0; background-repeat: repeat; background-size: 26px 26px, 46px 46px, 30px 30px; content: ""; height: 128px; opacity: .62; pointer-events: none; position: absolute; right: 0; top: 0; width: 160px; z-index: -1; }
+  .dark .petal-grid::before { opacity: .32; }
+  .data-lens { background: color-mix(in srgb, var(--brand-soft) 58%, white); box-shadow: inset 2px 2px 4px rgba(255,255,255,.9), inset -3px -3px 7px color-mix(in srgb, var(--brand) 8%, transparent), 0 6px 14px rgba(68,70,100,.05); }
+  .dark .data-lens { background: rgba(255,255,255,.06); box-shadow: inset 2px 2px 5px rgba(255,255,255,.06), inset -3px -3px 8px rgba(0,0,0,.15); }
+  .tactile-button { box-shadow: 0 8px 18px color-mix(in srgb, var(--brand) 24%, transparent), inset 0 1px 0 rgba(255,255,255,0.45); transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out), filter 160ms var(--ease-out); }
+  .tactile-button:hover { filter: saturate(1.12) brightness(1.02); transform: translateY(-2px); }
+  .tactile-button:active { transform: scale(0.97) translateY(0); box-shadow: 0 3px 8px color-mix(in srgb, var(--brand) 18%, transparent); }
+  .tutorial-trigger { box-shadow: 0 8px 20px color-mix(in srgb, var(--brand) 22%, transparent), inset 1px 1px 0 rgba(255,255,255,.78); }
+  .tutorial-trigger--panel { box-shadow: 0 5px 14px color-mix(in srgb, var(--brand) 18%, transparent), inset 1px 1px 0 rgba(255,255,255,.84); }
+  .tutorial-drawer { align-items: center; display: flex; inset: 0; justify-content: center; padding: 1rem; position: fixed; z-index: 95; }
+  .tutorial-backdrop { backdrop-filter: blur(10px); background: rgba(20,25,37,.48); inset: 0; position: absolute; }
+  .tutorial-player { aspect-ratio: 16 / 9; border: 1px solid rgba(255,255,255,.52); border-radius: 1.35rem; box-shadow: 0 24px 70px rgba(23,28,42,.36), inset 1px 1px 0 rgba(255,255,255,.42); max-height: min(68vh, 480px); max-width: 780px; overflow: hidden; position: relative; width: min(92vw, 780px); }
+  .tutorial-video { height: 100%; object-fit: cover; position: absolute; width: 100%; }
+  .tutorial-sheen { background: linear-gradient(180deg, rgba(11,17,31,.2), transparent 38%, rgba(11,17,31,.72)); inset: 0; pointer-events: none; position: absolute; }
+  .tutorial-content { display: grid; grid-template-rows: auto 1fr auto; inset: 0; padding: 1.1rem; pointer-events: none; position: absolute; }
+  .tutorial-content button { pointer-events: auto; }
+  .tutorial-footer { align-items: end; display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between; pointer-events: auto; }
+  .tutorial-actions { align-items: center; display: flex; gap: .5rem; }
+  .tutorial-subtitles { align-self: end; background: linear-gradient(135deg, rgba(15,22,38,.78), rgba(37,47,67,.58)); border: 1px solid rgba(255,255,255,.36); border-radius: 1rem; box-shadow: 0 12px 28px rgba(8,12,22,.25), inset 1px 1px 0 rgba(255,255,255,.18); margin: auto 0 .85rem; max-width: min(92%, 660px); padding: .65rem .85rem; }
+  .tutorial-subtitles__label { color: color-mix(in srgb, var(--brand-soft) 80%, white); font-size: 9px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+  .tutorial-subtitles__line { color: white; font-size: clamp(1rem, 2.1vw, 1.45rem); line-height: 1.22; margin-top: .25rem; text-shadow: 0 1px 12px rgba(6,10,18,.38); }
+  .tutorial-play { box-shadow: 0 7px 18px rgba(11,17,31,.32), inset 1px 1px 0 rgba(255,255,255,.82); transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out); }
+  .tutorial-play:hover { filter: brightness(1.04); transform: translateY(-1px); }
+  .motion-reduced .vault-shift, .motion-reduced .security-rail__halo { display: none; }
+  .motion-reduced .scroll-security-rail { opacity: .72; }
+  .motion-reduced .security-rail__trace path { stroke-dashoffset: 0 !important; }
+  .motion-reduced .security-rail__step { opacity: .42 !important; }
+  .motion-reduced .star-lock-brand { transform: rotate(0deg) !important; will-change: auto; }
+  .motion-reduced *, .motion-reduced *::before, .motion-reduced *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  .vault-shift { inset: 0; overflow: hidden; pointer-events: none; position: fixed; z-index: 80; }
+  .vault-shift__orbit { background: conic-gradient(from 0deg, transparent 0 12%, color-mix(in srgb, var(--transition-color) 48%, transparent) 18%, transparent 28% 44%, color-mix(in srgb, var(--transition-color) 32%, transparent) 55%, transparent 68% 82%, color-mix(in srgb, var(--transition-color) 38%, transparent) 91%, transparent 100%); border-radius: 50%; height: 96vmax; left: var(--transition-x); mask-image: radial-gradient(circle, transparent 0 31%, #000 33% 47%, transparent 49%); opacity: 0; position: absolute; top: var(--transition-y); transform: translate(-50%, -50%) scale(0.08) rotate(-100deg); width: 96vmax; }
+  .vault-shift__pixels { background-image: linear-gradient(90deg, color-mix(in srgb, var(--transition-color) 64%, transparent) 50%, transparent 50%), linear-gradient(color-mix(in srgb, var(--transition-color) 58%, transparent) 50%, transparent 50%); background-position: 0 0, 7px 7px; background-size: 14px 14px; inset: 0; mask-image: radial-gradient(circle at var(--transition-x) var(--transition-y), #000 0 3%, rgba(0,0,0,.86) 19%, transparent 55%); opacity: 0; position: absolute; transform: translateY(16px) rotate(2deg) scale(1.04); }
+  .vault-shift--palette .vault-shift__orbit { animation: vault-orbit 700ms var(--ease-out) both; }
+  .vault-shift--palette .vault-shift__pixels { animation: vault-pixels 650ms var(--ease-out) both; }
+  .vault-shift--theme .vault-shift__orbit { animation: vault-orbit 760ms var(--ease-out) both; filter: saturate(0.78); }
+  .vault-shift--theme .vault-shift__pixels { animation: vault-pixels 710ms var(--ease-out) both; filter: brightness(1.3); }
+  .theme-toggle--spinning svg { animation: vault-control-spin 600ms var(--ease-out) both; }
+  .palette-dot--active { animation: vault-control-spin 440ms var(--ease-out) both; }
+  .scroll-security-rail { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 0; }
+  .security-rail__halo { background: radial-gradient(ellipse at center, color-mix(in srgb, var(--rail-brand) 48%, transparent), transparent 66%); border-radius: 50%; height: 94rem; left: 50%; opacity: calc(.24 + var(--scroll-progress) * .28); position: absolute; top: 10rem; transform: translateX(-50%) rotate(calc(var(--scroll-progress) * 120deg)) scale(calc(1.12 + var(--scroll-progress) * .22)); transition: opacity 240ms var(--ease-out), transform 280ms var(--ease-out); width: 94rem; }
+  .security-rail__label { color: color-mix(in srgb, var(--rail-brand) 90%, #3d4856); font-size: 10px; font-weight: 900; left: 82%; letter-spacing: .18em; line-height: 1.55; opacity: calc(.42 + var(--scroll-progress) * .58); position: absolute; text-align: center; top: 8%; transform: rotate(90deg); z-index: 2; }
+  .security-rail__helix { height: 100%; inset: 0; position: absolute; width: 100%; }
+  .security-rail__trace { height: 100%; inset: 0; overflow: visible; position: absolute; transform: scale(1.34); transform-origin: 50% 8%; width: 100%; }
+  .security-rail__trace path { fill: none; filter: drop-shadow(0 4px 11px color-mix(in srgb, var(--rail-brand) 40%, transparent)); opacity: .76; stroke: var(--rail-brand); stroke-linecap: round; stroke-width: .72; transition: stroke-dashoffset 220ms var(--ease-out); }
+  .security-ribbon--secondary { opacity: .68; stroke-dasharray: 2 4; }
+  .security-rail__step { height: 32px; position: absolute; transform: translateX(-50%) scale(1.22); transition: opacity 180ms var(--ease-out), left 260ms var(--ease-out); width: 170px; }
+  .security-rail__rung { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--rail-brand) 68%, transparent), transparent); height: 3px; left: 50%; position: absolute; top: 15px; transform-origin: center; transition: transform 180ms var(--ease-out); width: 100%; }
+  .security-rail__bead { background: color-mix(in srgb, var(--rail-brand) 58%, white); border: 1px solid color-mix(in srgb, var(--rail-brand) 82%, white); border-radius: 999px; box-shadow: 0 3px 10px color-mix(in srgb, var(--rail-brand) 34%, transparent); height: 9px; left: 50%; position: absolute; top: 12px; transition: transform 180ms var(--ease-out); width: 9px; }
+  .security-rail__motif { align-items: center; background: color-mix(in srgb, var(--rail-brand) 38%, white); border: 2px solid color-mix(in srgb, var(--rail-brand) 76%, white); border-radius: 50%; box-shadow: 0 7px 20px color-mix(in srgb, var(--rail-brand) 38%, transparent), inset 1px 1px 0 rgba(255,255,255,.94); color: color-mix(in srgb, var(--rail-brand) 92%, #293341); display: flex; height: 34px; justify-content: center; left: 50%; position: absolute; top: -1px; transition: transform 180ms var(--ease-out); width: 34px; }
+  .dark .security-rail__motif { background: color-mix(in srgb, var(--rail-brand) 24%, #1b2432); border-color: color-mix(in srgb, var(--rail-brand) 50%, white); color: color-mix(in srgb, var(--rail-brand) 50%, white); }
+  .atlas-shell[data-device="tablet"] .security-rail__trace { transform: scale(1.16); transform-origin: 50% 10%; }
+  .atlas-shell[data-device="tablet"] .security-rail__step { transform: translateX(-50%) scale(1.08); }
+  .atlas-shell[data-device="tablet"] .security-rail__halo { height: 76rem; top: 8rem; width: 76rem; }
+  .atlas-shell[data-device="phone"] .security-rail__trace { transform: scale(1.06); transform-origin: 50% 6%; }
+  .atlas-shell[data-device="phone"] .security-rail__step { transform: translateX(-50%) scale(.82); }
+  .atlas-shell[data-device="phone"] .security-rail__halo { height: 52rem; top: 4rem; width: 52rem; }
+  .dna-section { isolation: isolate; position: relative; }
+  .dna-atmosphere { background: radial-gradient(circle, color-mix(in srgb, var(--brand) 38%, transparent) 0 2px, transparent 3px), radial-gradient(ellipse at center, color-mix(in srgb, var(--brand) 26%, transparent), transparent 62%); border-radius: 50%; height: 26rem; pointer-events: none; position: absolute; right: 5%; top: -7rem; transition: opacity 300ms var(--ease-out), transform 450ms var(--ease-out); width: 26rem; z-index: -1; }
+  .dna-caption { align-items: center; background: color-mix(in srgb, var(--brand-soft) 68%, white); border: 1px solid color-mix(in srgb, var(--brand) 18%, white); border-radius: 999px; color: color-mix(in srgb, var(--brand) 70%, #29313d); display: inline-flex; font-size: 10px; font-weight: 800; gap: .35rem; padding: .35rem .55rem; }
+  .dark .dna-caption { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); color: color-mix(in srgb, var(--brand) 55%, white); }
+  .dna-helix { background: radial-gradient(ellipse at center, color-mix(in srgb, var(--dna-brand) 16%, transparent), transparent 70%); border: 1px solid color-mix(in srgb, var(--dna-brand) 13%, transparent); border-radius: 1.2rem; height: 238px; margin: auto; max-width: 550px; overflow: hidden; position: relative; }
+  .dna-trace { height: 100%; inset: 0; overflow: visible; pointer-events: none; position: absolute; width: 100%; z-index: 1; }
+  .dna-trace__strand { filter: drop-shadow(0 3px 6px color-mix(in srgb, var(--dna-brand) 38%, transparent)); stroke-linecap: round; stroke-width: 4; transition: opacity 260ms var(--ease-out), stroke-dashoffset 360ms var(--ease-out); }
+  .dna-trace__rung { stroke-linecap: round; stroke-width: 2.6; transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
+  .dna-core { background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--dna-brand) 45%, transparent) 16% 84%, transparent); height: 100%; left: 50%; opacity: calc(.28 + var(--dna-progress) * .42); position: absolute; transform: translateX(-50%); transition: opacity 280ms var(--ease-out); width: 2px; }
+  .dna-row { height: 24px; left: 50%; position: absolute; transform: translateX(-50%); transition: opacity 240ms var(--ease-out); width: 100%; z-index: 2; }
+  .dna-rung { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--dna-brand) 58%, transparent), transparent); height: 2px; left: 50%; position: absolute; top: 11px; transform-origin: center; transition: transform 230ms var(--ease-out); width: 58%; }
+  .dna-node { align-items: center; background: color-mix(in srgb, var(--dna-brand) 34%, white); border: 2px solid color-mix(in srgb, var(--dna-brand) 70%, white); border-radius: 50%; box-shadow: 0 7px 18px color-mix(in srgb, var(--dna-brand) 32%, transparent), inset 1px 1px 0 rgba(255,255,255,.98); color: color-mix(in srgb, var(--dna-brand) 88%, #26323f); display: flex; height: 38px; justify-content: center; left: 50%; position: absolute; top: -7px; transition: transform 260ms var(--ease-out); width: 38px; }
+  .dark .dna-node { background: color-mix(in srgb, var(--dna-brand) 32%, #1d2531); border-color: color-mix(in srgb, var(--dna-brand) 65%, white); box-shadow: 0 6px 15px color-mix(in srgb, var(--dna-brand) 25%, transparent), inset 1px 1px 0 rgba(255,255,255,.1); color: color-mix(in srgb, var(--dna-brand) 55%, white); }
+  @media (max-width: 767px) { .dna-helix { height: 196px; max-width: 320px; } .dna-atmosphere { height: 20rem; right: -20%; top: -6rem; width: 20rem; } .dna-rung { width: 72%; } .dna-node { height: 31px; width: 31px; } }
+  @keyframes vault-orbit { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.08) rotate(-100deg); } 22% { opacity: .55; } 74% { opacity: .2; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.38) rotate(185deg); } }
+  @keyframes vault-pixels { 0% { opacity: 0; transform: translateY(16px) rotate(2deg) scale(1.04); } 25% { opacity: .34; } 64% { opacity: .12; } 100% { opacity: 0; transform: translateY(-20px) rotate(-1deg) scale(.98); } }
+  @keyframes vault-control-spin { 0% { transform: rotate(0deg) scale(1); } 48% { transform: rotate(160deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); } }
+  .float-in { animation: float-in 560ms var(--ease-out) both; }
+  .delay-1 { animation-delay: 70ms; }
+  .delay-2 { animation-delay: 135ms; }
+  .delay-3 { animation-delay: 200ms; }
+  @keyframes float-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 760px) { .glass-card { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); } .security-rail__label { display: none; } .security-rail__trace path { opacity: .56; stroke-width: .74; } .security-rail__step { width: 96px; } .security-rail__motif { height: 24px; width: 24px; } .security-rail__motif svg { height: 11px; width: 11px; } .security-rail__rung { height: 2px; } .tutorial-drawer { align-items: center; padding: .65rem; } .tutorial-player { aspect-ratio: auto; border-radius: 1.35rem; height: min(82svh, 650px); max-height: none; max-width: 520px; width: min(96vw, 520px); } .tutorial-content { padding: 1rem; } .tutorial-footer { align-items: stretch; flex-direction: column; gap: .85rem; } .tutorial-footer > div:first-child { max-width: none; } .tutorial-actions { display: grid; grid-template-columns: 3.25rem 1fr; width: 100%; } .tutorial-icon-button { height: 3.25rem; width: 3.25rem; } .tutorial-play { height: 3.25rem; width: 100%; } .tutorial-subtitles { margin-bottom: .7rem; max-width: 100%; padding: .65rem .75rem; } .tutorial-subtitles__line { font-size: 1rem; } }
+  @media (prefers-reduced-motion: reduce) { .float-in { animation: none; } .vault-shift { display: none; } .dna-atmosphere, .dna-core, .dna-row, .dna-rung, .dna-node, .scroll-security-rail, .security-rail__halo, .security-rail__step, .security-rail__rung, .security-rail__motif, .star-lock-brand { transition: none !important; } *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }
+}
