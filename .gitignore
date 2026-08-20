@@ -1,0 +1,22 @@
+# Dependencies and package stores
+node_modules/
+.pnpm-store/
+
+# Build output and caches
+dist/
+*.tsbuildinfo
+.vite/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
